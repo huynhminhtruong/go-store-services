@@ -15,7 +15,7 @@ func GetDataSourceURL() string {
 }
 
 func GetApplicationPort() int {
-	portStr := getEnvironmentValue("APPLICATION_PORT")
+	portStr := getEnvironmentValue("STORING_PORT")
 	port, err := strconv.Atoi(portStr)
 
 	if err != nil {
