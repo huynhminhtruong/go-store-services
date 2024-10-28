@@ -3,8 +3,8 @@ package grpc
 import (
 	"context"
 
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/internal/application/core/domain"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/services/book"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/application/core/domain"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book"
 )
 
 // import reference type is [go_package_name].[type_struct_name]

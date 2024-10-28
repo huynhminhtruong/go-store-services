@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/internal/application/core/domain"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/application/core/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

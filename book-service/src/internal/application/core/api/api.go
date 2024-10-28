@@ -1,8 +1,8 @@
 package api
 
 import (
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/internal/application/core/domain"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/internal/ports"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/application/core/domain"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/ports"
 )
 
 type Application struct {

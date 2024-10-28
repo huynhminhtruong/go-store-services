@@ -5,9 +5,9 @@ import (
 	"log"
 	"net"
 
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/config"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/internal/ports"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/src/services/book"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/config"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/ports"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

@@ -1,4 +1,4 @@
-module github.com/huynhminhtruong/go-store-services/book-service/src
+module github.com/huynhminhtruong/go-store-services/book-service
 
 go 1.23.1
 
