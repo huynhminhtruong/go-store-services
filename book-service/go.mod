@@ -1,9 +1,11 @@
-module github.com/huynhminhtruong/go-store-services/app-services/storing
+module github.com/huynhminhtruong/go-store-services/book-service/src
 
 go 1.23.1
 
 require (
+	github.com/huynhminhtruong/go-store-services/app-services/storing v0.0.0-20241028121051-19d0e506d90b
 	google.golang.org/grpc v1.67.1
+	google.golang.org/protobuf v1.35.1
 	gorm.io/driver/postgres v1.5.9
 	gorm.io/gorm v1.25.12
 )
@@ -21,5 +23,4 @@ require (
 	golang.org/x/sys v0.26.0 // indirect
 	golang.org/x/text v0.19.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240814211410-ddb44dafa142 // indirect
-	google.golang.org/protobuf v1.34.2 // indirect
 )

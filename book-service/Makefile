@@ -8,13 +8,13 @@ install-grpc:
 	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
 mkdir-service:
-	@mkdir -p ./${ROOT_SERVICE}/services/${SERVICE_NAME}
+	@mkdir -p ./src/services/${SERVICE_NAME}
 
 # need install protoc(Protocol Buffers Compiler) first
 build-service:
 	@protoc -I ./proto/${SERVICE_NAME} \
-		--go_out ./${ROOT_SERVICE}/services/${SERVICE_NAME} \
+		--go_out ./src/services/${SERVICE_NAME} \
 		--go_opt paths=source_relative \
-		--go-grpc_out ./${ROOT_SERVICE}/services/${SERVICE_NAME} \
+		--go-grpc_out ./src/services/${SERVICE_NAME} \
 		--go-grpc_opt paths=source_relative \
 		./proto/${SERVICE_NAME}/*.proto
