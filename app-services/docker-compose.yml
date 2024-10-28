@@ -2,7 +2,7 @@
 services:
   db:
     image: postgres:12.8
-    container_name: "${DB_CONTAINER_NAME:-postgres_db}"
+    container_name: "${DB_CONTAINER_NAME:-postgres_db_dev}"
     environment:
       POSTGRES_USER: "${POSTGRES_USER:-postgres}"
       POSTGRES_PASSWORD: postgres
