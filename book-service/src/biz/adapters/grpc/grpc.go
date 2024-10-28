@@ -3,7 +3,7 @@ package grpc
 import (
 	"context"
 
-	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/application/core/domain"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/application/core/domain"
 	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book"
 )
 

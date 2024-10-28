@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 
+	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/adapters/db"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/adapters/grpc"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/application/core/api"
 	"github.com/huynhminhtruong/go-store-services/book-service/src/config"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/adapters/db"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/adapters/grpc"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/internal/application/core/api"
 )
 
 /*

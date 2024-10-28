@@ -1,6 +1,6 @@
 package ports
 
-import "github.com/huynhminhtruong/go-store-services/book-service/src/internal/application/core/domain"
+import "github.com/huynhminhtruong/go-store-services/book-service/src/biz/application/core/domain"
 
 type APIPort interface {
 	InsertBook(book domain.Book) (domain.Book, error)
