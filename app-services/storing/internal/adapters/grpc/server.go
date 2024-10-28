@@ -39,7 +39,7 @@ func (a Adapter) Run() {
 	// sử dụng các hàm đã được triển khai trong Adapter
 	book.RegisterBookServer(grpcServer, a)
 
-	if config.GetEnv() == "development" {
+	if config.GetEnv() == "dev" {
 		reflection.Register(grpcServer)
 	}
 
