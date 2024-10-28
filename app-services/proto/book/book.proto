@@ -1,0 +1,28 @@
+syntax="proto3";
+
+option go_package="github.com/huynhminhtruong/go-store-services/app-services/storing/services/book";
+
+message CreateBookRequest {
+    string title = 1;
+    string author = 2;
+    string publish_year = 3;
+}
+
+message CreateBookResponse {
+    int64 book_id = 1;
+}
+
+message GetBookRequest {
+    int64 book_id = 1;
+}
+
+message GetBookResponse {
+    string title = 1;
+    string author = 2;
+    string publish_year = 3;   
+}
+
+service Book {
+    rpc Create(CreateBookRequest) returns (CreateBookResponse){}
+    rpc Get(GetBookRequest) returns (GetBookResponse){}
+}
