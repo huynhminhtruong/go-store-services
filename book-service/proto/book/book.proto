@@ -1,6 +1,6 @@
 syntax="proto3";
 
-option go_package="github.com/huynhminhtruong/go-store-services/book-service/src/book";
+option go_package="github.com/huynhminhtruong/go-store-services/book-service/src/services/book";
 
 message CreateBookRequest {
     string title = 1;
