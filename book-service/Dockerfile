@@ -3,7 +3,7 @@
 FROM golang:1.23-alpine as build-env
 
 ENV APP_NAME go-book-service
-ENV CMD_PATH cmd/main.go
+ENV CMD_PATH src/cmd/main.go
 
 COPY . $GOPATH/src/$APP_NAME
 WORKDIR $GOPATH/src/$APP_NAME
