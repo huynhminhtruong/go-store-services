@@ -17,6 +17,6 @@ FROM alpine:3.14
 ENV APP_NAME go-storing-app
 COPY --from=build-env /$APP_NAME .
 
-EXPOSE 8081
+EXPOSE 8082
 
 CMD ./$APP_NAME
