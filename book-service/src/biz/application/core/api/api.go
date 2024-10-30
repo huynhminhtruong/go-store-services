@@ -31,3 +31,7 @@ func (a Application) GetBook(id int64) (domain.Book, error) {
 	}
 	return book, nil
 }
+
+func (a Application) ListBooks() ([]domain.Book, error) {
+	return []domain.Book{}, nil
+}
