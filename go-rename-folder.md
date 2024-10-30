@@ -2,7 +2,7 @@ Khi bạn thay đổi tên một thư mục trong dự án Go, bạn cần cập
 
 ### Bước 1: Thay Đổi Tên Thư Mục
 
-Đổi tên thư mục theo cấu trúc mong muốn.
+Đổi tên thư mục theo cấu trúc mong muốn
 
 ### Bước 2: Cập Nhật Các `import` Path
 
@@ -12,7 +12,7 @@ Dò tìm tất cả các file Go có import path chứa tên thư mục cũ và 
 grep -rl 'old_folder_name' . | xargs sed -i 's|old_folder_name|new_folder_name|g'
 ```
 
-Thay `old_folder_name` và `new_folder_name` bằng tên thư mục cũ và mới.
+Thay `old_folder_name` và `new_folder_name` bằng tên thư mục cũ và mới
 
 ### Bước 3: Cập Nhật `go.mod`
 
@@ -24,4 +24,4 @@ go mod tidy
 
 ### Bước 4: Kiểm Tra và Xác Nhận
 
-Kiểm tra lại dự án của bạn bằng cách chạy các lệnh `go build`, `go run`, hoặc `go test` để đảm bảo mọi thứ hoạt động bình thường sau khi cập nhật.
+Kiểm tra lại dự án của bạn bằng cách chạy các lệnh `go build`, `go run`, hoặc `go test` để đảm bảo mọi thứ hoạt động bình thường sau khi cập nhật

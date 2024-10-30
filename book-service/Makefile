@@ -7,6 +7,9 @@ install-protobuf:
 install-grpc:
 	@go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 
+install-grpc-gateway:
+	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
+
 mkdir-service:
 	@mkdir -p ./src/services/${SERVICE_NAME}
 
@@ -18,3 +21,19 @@ build-service:
 		--go-grpc_out ./src/services/${SERVICE_NAME} \
 		--go-grpc_opt paths=source_relative \
 		./proto/${SERVICE_NAME}/*.proto
+
+# add the gRPC-Gateway generator to the protoc invocation
+gen-grpc-gateway: 
+	@protoc -I ./proto/ \
+		--proto_path=proto "proto/${SERVICE_NAME}/*.proto" \
+		--go_out ./src/services/${SERVICE_NAME} --go_opt paths=source_relative \
+		--go-grpc_out ./src/services/${SERVICE_NAME} --go-grpc_opt paths=source_relative \
+		--grpc-gateway_out=./src/services/${SERVICE_NAME} --grpc-gateway_opt paths=source_relative \
+
+# gRPC-Gateway generator to the protoc invocation example
+gen-grpc-gateway-example: sub-dir
+	@protoc -I ./proto \
+		--proto_path=proto "proto/$(SERVICE)/$(PROTO_FILE)" \
+		--go_out=$(WORKDIR) --go_opt=paths=source_relative \
+		--go-grpc_out=$(WORKDIR) --go-grpc_opt=paths=source_relative \
+		--grpc-gateway_out=$(WORKDIR) --grpc-gateway_opt=paths=source_relative

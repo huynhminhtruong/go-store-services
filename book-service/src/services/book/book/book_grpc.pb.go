@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.28.3
-// source: book.proto
+// source: book/book.proto
 
 package book
 
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Book_Create_FullMethodName = "/Book/Create"
-	Book_Get_FullMethodName    = "/Book/Get"
+	Book_Create_FullMethodName  = "/Book/Create"
+	Book_GetBook_FullMethodName = "/Book/GetBook"
 )
 
 // BookClient is the client API for Book service.
@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BookClient interface {
 	Create(ctx context.Context, in *CreateBookRequest, opts ...grpc.CallOption) (*CreateBookResponse, error)
-	Get(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error)
+	GetBook(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error)
 }
 
 type bookClient struct {
@@ -49,10 +49,10 @@ func (c *bookClient) Create(ctx context.Context, in *CreateBookRequest, opts ...
 	return out, nil
 }
 
-func (c *bookClient) Get(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error) {
+func (c *bookClient) GetBook(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBookResponse)
-	err := c.cc.Invoke(ctx, Book_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Book_GetBook_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -64,7 +64,7 @@ func (c *bookClient) Get(ctx context.Context, in *GetBookRequest, opts ...grpc.C
 // for forward compatibility.
 type BookServer interface {
 	Create(context.Context, *CreateBookRequest) (*CreateBookResponse, error)
-	Get(context.Context, *GetBookRequest) (*GetBookResponse, error)
+	GetBook(context.Context, *GetBookRequest) (*GetBookResponse, error)
 	mustEmbedUnimplementedBookServer()
 }
 
@@ -78,8 +78,8 @@ type UnimplementedBookServer struct{}
 func (UnimplementedBookServer) Create(context.Context, *CreateBookRequest) (*CreateBookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedBookServer) Get(context.Context, *GetBookRequest) (*GetBookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+func (UnimplementedBookServer) GetBook(context.Context, *GetBookRequest) (*GetBookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBook not implemented")
 }
 func (UnimplementedBookServer) mustEmbedUnimplementedBookServer() {}
 func (UnimplementedBookServer) testEmbeddedByValue()              {}
@@ -120,20 +120,20 @@ func _Book_Create_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Book_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Book_GetBook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBookRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BookServer).Get(ctx, in)
+		return srv.(BookServer).GetBook(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Book_Get_FullMethodName,
+		FullMethod: Book_GetBook_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookServer).Get(ctx, req.(*GetBookRequest))
+		return srv.(BookServer).GetBook(ctx, req.(*GetBookRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -150,10 +150,10 @@ var Book_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Book_Create_Handler,
 		},
 		{
-			MethodName: "Get",
-			Handler:    _Book_Get_Handler,
+			MethodName: "GetBook",
+			Handler:    _Book_GetBook_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "book.proto",
+	Metadata: "book/book.proto",
 }

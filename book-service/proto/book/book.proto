@@ -1,5 +1,7 @@
 syntax="proto3";
 
+import "google/api/annotations.proto";
+
 option go_package="github.com/huynhminhtruong/go-store-services/book-service/src/services/book";
 
 message CreateBookRequest {
@@ -22,7 +24,22 @@ message GetBookResponse {
     string publish_year = 3;   
 }
 
-service Book {
+message ListBooksRequest {}
+
+message ListBooksResponse {
+    repeated GetBookResponse books = 1;
+}
+
+service BookService {
     rpc Create(CreateBookRequest) returns (CreateBookResponse){}
-    rpc Get(GetBookRequest) returns (GetBookResponse){}
+    rpc GetBook(GetBookRequest) returns (GetBookResponse) {
+        option (google.api.http) = {
+          get: "/v1/books/{book_id}"
+        };
+    }
+    rpc ListBooks(ListBooksRequest) returns (ListBooksResponse) {
+        option (google.api.http) = {
+            get: "/v1/books"
+        };
+    }
 }
