@@ -2,7 +2,6 @@ package db
 
 import (
 	"fmt"
-
 	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/application/core/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -26,6 +25,7 @@ func NewAdapter(dataSourceURL string) (*Adapter, error) {
 		return nil, fmt.Errorf("db connection error: %v", openErr)
 	}
 
+	// create database table
 	err := db.AutoMigrate(&Book{})
 	if err != nil {
 		return nil, fmt.Errorf("db migration error: %v", err)
@@ -34,6 +34,15 @@ func NewAdapter(dataSourceURL string) (*Adapter, error) {
 	return &Adapter{db: db}, nil
 }
 
-func (a Adapter) Get(id string) error { return nil }
+func (a Adapter) Get(bookID int64) (domain.Book, error) {
+	var book domain.Book
+
+	err := a.db.First(&book, "book_id = ?", bookID).Error
+	if err != nil {
+		return domain.Book{}, err
+	}
+
+	return book, nil
+}
 
 func (a Adapter) Save(book *domain.Book) error { return nil }

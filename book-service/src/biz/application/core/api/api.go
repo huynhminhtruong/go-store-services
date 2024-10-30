@@ -15,11 +15,19 @@ func NewApplication(db ports.DBPort) *Application {
 	}
 }
 
-// method of ports.APIPort interface
+// InsertBook method of ports.APIPort interface
 func (a Application) InsertBook(book domain.Book) (domain.Book, error) {
 	if err := a.db.Save(&book); err != nil {
 		return domain.Book{}, err
 	}
 
+	return book, nil
+}
+
+func (a Application) GetBook(id int64) (domain.Book, error) {
+	book, err := a.db.Get(id)
+	if err != nil {
+		return domain.Book{}, err
+	}
 	return book, nil
 }

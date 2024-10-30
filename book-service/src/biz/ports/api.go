@@ -4,9 +4,11 @@ import "github.com/huynhminhtruong/go-store-services/book-service/src/biz/applic
 
 type APIPort interface {
 	InsertBook(book domain.Book) (domain.Book, error)
+	GetBook(id int64) (domain.Book, error)
+	ListBooks() ([]domain.Book, error)
 }
 
 type DBPort interface {
-	Get(id string) error
+	Get(id int64) (domain.Book, error)
 	Save(book *domain.Book) error
 }
