@@ -7,7 +7,7 @@ import (
 
 	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/ports"
 	"github.com/huynhminhtruong/go-store-services/book-service/src/config"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book/book"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -15,7 +15,7 @@ import (
 type Adapter struct {
 	api  ports.APIPort
 	port int
-	book.UnimplementedBookServer
+	book.UnimplementedBookServiceServer
 }
 
 func NewAdapter(api ports.APIPort, port int) *Adapter {
@@ -37,7 +37,7 @@ func (a Adapter) Run() {
 	// Điều này nói với gRPC server rằng grpcServer
 	// sẽ thực thi các service gRPC của BookServer bằng cách
 	// sử dụng các hàm đã được triển khai trong Adapter
-	book.RegisterBookServer(grpcServer, a)
+	book.RegisterBookServiceServer(grpcServer, a)
 
 	if config.GetEnv() == "dev" {
 		reflection.Register(grpcServer)

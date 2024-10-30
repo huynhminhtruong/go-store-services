@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/application/core/domain"
-	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book/book"
+	"github.com/huynhminhtruong/go-store-services/book-service/src/services/book"
 )
 
 // import reference type is [go_package_name].[type_struct_name]
