@@ -26,9 +26,9 @@ build-service:
 gen-grpc-gateway: 
 	@protoc -I ./proto/ \
 		--proto_path=proto "proto/${SERVICE_NAME}/*.proto" \
-		--go_out ./src/services/${SERVICE_NAME} --go_opt paths=source_relative \
-		--go-grpc_out ./src/services/${SERVICE_NAME} --go-grpc_opt paths=source_relative \
-		--grpc-gateway_out=./src/services/${SERVICE_NAME} --grpc-gateway_opt paths=source_relative \
+		--go_out ./src/services/ --go_opt paths=source_relative \
+		--go-grpc_out ./src/services/ --go-grpc_opt paths=source_relative \
+		--grpc-gateway_out=./src/services/ --grpc-gateway_opt paths=source_relative \
 
 # gRPC-Gateway generator to the protoc invocation example
 gen-grpc-gateway-example: sub-dir
