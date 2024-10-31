@@ -34,7 +34,21 @@ func (a Adapter) GetBook(ctx context.Context, request *book.GetBookRequest) (*bo
 	return bookRes, nil
 }
 
-// ListBooks TODO get list of books
+// ListBooks
 func (a Adapter) ListBooks(ctx context.Context, request *book.ListBooksRequest) (*book.ListBooksResponse, error) {
-	return &book.ListBooksResponse{}, nil
+	books, err := a.api.ListBooks()
+	if err != nil {
+		return nil, err
+	}
+	// convert from []domain.Book to []*book.GetBookResponse
+	var bookResponses []*book.GetBookResponse
+	for _, b := range books {
+		bookResponse := &book.GetBookResponse{
+			Title:       b.Title,
+			Author:      b.Author,
+			PublishYear: b.PublishYear,
+		}
+		bookResponses = append(bookResponses, bookResponse)
+	}
+	return &book.ListBooksResponse{Books: bookResponses}, nil
 }
