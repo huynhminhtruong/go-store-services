@@ -33,5 +33,9 @@ func (a Application) GetBook(id int64) (domain.Book, error) {
 }
 
 func (a Application) ListBooks() ([]domain.Book, error) {
-	return []domain.Book{}, nil
+	books, err := a.db.GetListBooks()
+	if err != nil {
+		return []domain.Book{}, nil
+	}
+	return books, nil
 }

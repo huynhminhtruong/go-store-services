@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+
 	"github.com/huynhminhtruong/go-store-services/book-service/src/biz/application/core/domain"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -46,3 +47,13 @@ func (a Adapter) Get(bookID int64) (domain.Book, error) {
 }
 
 func (a Adapter) Save(book *domain.Book) error { return nil }
+
+func (a Adapter) GetListBooks() ([]domain.Book, error) {
+	var books []domain.Book
+
+	if err := a.db.Find(&books).Error; err != nil {
+		return []domain.Book{}, err
+	}
+
+	return books, nil
+}
