@@ -34,7 +34,7 @@ func (a Adapter) GetBook(ctx context.Context, request *book.GetBookRequest) (*bo
 	return bookRes, nil
 }
 
-// ListBooks
+// ListBooks get list of books
 func (a Adapter) ListBooks(ctx context.Context, request *book.ListBooksRequest) (*book.ListBooksResponse, error) {
 	books, err := a.api.ListBooks()
 	if err != nil {
