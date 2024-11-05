@@ -16,7 +16,7 @@ func (a Adapter) Create(ctx context.Context, request *book.CreateBookRequest) (*
 	if err != nil {
 		return nil, err
 	}
-	return &book.CreateBookResponse{BookId: result.BookID}, nil
+	return &book.CreateBookResponse{BookId: result.ID}, nil
 }
 
 // GetBook by book_id
