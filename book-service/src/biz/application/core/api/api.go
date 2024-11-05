@@ -16,12 +16,9 @@ func NewApplication(db ports.DBPort) *Application {
 }
 
 // InsertBook method of ports.APIPort interface
-func (a Application) InsertBook(book domain.Book) (domain.Book, error) {
-	if err := a.db.Save(&book); err != nil {
-		return domain.Book{}, err
-	}
-
-	return book, nil
+func (a Application) InsertBook(book domain.Book) *domain.CreateBookResponse {
+	result := a.db.Save(&book)
+	return result
 }
 
 func (a Application) GetBook(id int64) (domain.Book, error) {
