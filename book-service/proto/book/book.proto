@@ -31,15 +31,19 @@ message ListBooksResponse {
 }
 
 service BookService {
-    rpc Create(CreateBookRequest) returns (CreateBookResponse){}
-    rpc GetBook(GetBookRequest) returns (GetBookResponse) {
+    rpc Create(CreateBookRequest) returns (CreateBookResponse){
         option (google.api.http) = {
-          get: "/v1/books/{book_id}"
+            post: "/v1/books"
         };
     }
     rpc ListBooks(ListBooksRequest) returns (ListBooksResponse) {
         option (google.api.http) = {
             get: "/v1/books"
+        };
+    }
+    rpc GetBook(GetBookRequest) returns (GetBookResponse) {
+        option (google.api.http) = {
+          get: "/v1/books/{book_id}"
         };
     }
 }

@@ -20,8 +20,8 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	BookService_Create_FullMethodName    = "/BookService/Create"
-	BookService_GetBook_FullMethodName   = "/BookService/GetBook"
 	BookService_ListBooks_FullMethodName = "/BookService/ListBooks"
+	BookService_GetBook_FullMethodName   = "/BookService/GetBook"
 )
 
 // BookServiceClient is the client API for BookService service.
@@ -29,8 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BookServiceClient interface {
 	Create(ctx context.Context, in *CreateBookRequest, opts ...grpc.CallOption) (*CreateBookResponse, error)
-	GetBook(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error)
 	ListBooks(ctx context.Context, in *ListBooksRequest, opts ...grpc.CallOption) (*ListBooksResponse, error)
+	GetBook(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error)
 }
 
 type bookServiceClient struct {
@@ -51,20 +51,20 @@ func (c *bookServiceClient) Create(ctx context.Context, in *CreateBookRequest, o
 	return out, nil
 }
 
-func (c *bookServiceClient) GetBook(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error) {
+func (c *bookServiceClient) ListBooks(ctx context.Context, in *ListBooksRequest, opts ...grpc.CallOption) (*ListBooksResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBookResponse)
-	err := c.cc.Invoke(ctx, BookService_GetBook_FullMethodName, in, out, cOpts...)
+	out := new(ListBooksResponse)
+	err := c.cc.Invoke(ctx, BookService_ListBooks_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *bookServiceClient) ListBooks(ctx context.Context, in *ListBooksRequest, opts ...grpc.CallOption) (*ListBooksResponse, error) {
+func (c *bookServiceClient) GetBook(ctx context.Context, in *GetBookRequest, opts ...grpc.CallOption) (*GetBookResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListBooksResponse)
-	err := c.cc.Invoke(ctx, BookService_ListBooks_FullMethodName, in, out, cOpts...)
+	out := new(GetBookResponse)
+	err := c.cc.Invoke(ctx, BookService_GetBook_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,8 +76,8 @@ func (c *bookServiceClient) ListBooks(ctx context.Context, in *ListBooksRequest,
 // for forward compatibility.
 type BookServiceServer interface {
 	Create(context.Context, *CreateBookRequest) (*CreateBookResponse, error)
-	GetBook(context.Context, *GetBookRequest) (*GetBookResponse, error)
 	ListBooks(context.Context, *ListBooksRequest) (*ListBooksResponse, error)
+	GetBook(context.Context, *GetBookRequest) (*GetBookResponse, error)
 	mustEmbedUnimplementedBookServiceServer()
 }
 
@@ -91,11 +91,11 @@ type UnimplementedBookServiceServer struct{}
 func (UnimplementedBookServiceServer) Create(context.Context, *CreateBookRequest) (*CreateBookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedBookServiceServer) GetBook(context.Context, *GetBookRequest) (*GetBookResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBook not implemented")
-}
 func (UnimplementedBookServiceServer) ListBooks(context.Context, *ListBooksRequest) (*ListBooksResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListBooks not implemented")
+}
+func (UnimplementedBookServiceServer) GetBook(context.Context, *GetBookRequest) (*GetBookResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBook not implemented")
 }
 func (UnimplementedBookServiceServer) mustEmbedUnimplementedBookServiceServer() {}
 func (UnimplementedBookServiceServer) testEmbeddedByValue()                     {}
@@ -136,24 +136,6 @@ func _BookService_Create_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BookService_GetBook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBookRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BookServiceServer).GetBook(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: BookService_GetBook_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BookServiceServer).GetBook(ctx, req.(*GetBookRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _BookService_ListBooks_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListBooksRequest)
 	if err := dec(in); err != nil {
@@ -172,6 +154,24 @@ func _BookService_ListBooks_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BookService_GetBook_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBookRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BookServiceServer).GetBook(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BookService_GetBook_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BookServiceServer).GetBook(ctx, req.(*GetBookRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BookService_ServiceDesc is the grpc.ServiceDesc for BookService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -184,12 +184,12 @@ var BookService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BookService_Create_Handler,
 		},
 		{
-			MethodName: "GetBook",
-			Handler:    _BookService_GetBook_Handler,
-		},
-		{
 			MethodName: "ListBooks",
 			Handler:    _BookService_ListBooks_Handler,
+		},
+		{
+			MethodName: "GetBook",
+			Handler:    _BookService_GetBook_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

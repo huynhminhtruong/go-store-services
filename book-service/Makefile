@@ -11,21 +11,24 @@ install-grpc-gateway:
 	@go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
 
 mkdir-service:
-	@mkdir -p ./src/services/${SERVICE_NAME}
+	@mkdir -p ./src/services/${SERVICE}
+
+clean-gen-grpc-service:
+	@rm -rf ./src/services/${SERVICE}
 
 # need install protoc(Protocol Buffers Compiler) first
 build-service:
-	@protoc -I ./proto/${SERVICE_NAME} \
-		--go_out ./src/services/${SERVICE_NAME} \
+	@protoc -I ./proto/${SERVICE} \
+		--go_out ./src/services/${SERVICE} \
 		--go_opt paths=source_relative \
-		--go-grpc_out ./src/services/${SERVICE_NAME} \
+		--go-grpc_out ./src/services/${SERVICE} \
 		--go-grpc_opt paths=source_relative \
-		./proto/${SERVICE_NAME}/*.proto
+		./proto/${SERVICE}/*.proto
 
 # add the gRPC-Gateway generator to the protoc invocation
 gen-grpc-gateway: 
 	@protoc -I ./proto/ \
-		--proto_path=proto "proto/${SERVICE_NAME}/*.proto" \
+		--proto_path=proto "proto/${SERVICE}/*.proto" \
 		--go_out ./src/services/ --go_opt paths=source_relative \
 		--go-grpc_out ./src/services/ --go-grpc_opt paths=source_relative \
 		--grpc-gateway_out=./src/services/ --grpc-gateway_opt paths=source_relative \
