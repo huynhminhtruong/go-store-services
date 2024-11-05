@@ -46,15 +46,9 @@ func (a Adapter) Get(bookID int64) (domain.Book, error) {
 	return book, nil
 }
 
-type CreateBookResponse struct {
-	BookID       int64 `json:"book_id"`
-	RowsAffected int64 `json:"rows_affected"`
-	ErrorMessage error `json:"error_message"`
-}
-
-func (a Adapter) Save(book *domain.Book) *CreateBookResponse {
+func (a Adapter) Save(book *domain.Book) *domain.CreateBookResponse {
 	newBook := domain.NewBook(book.Title, book.Author, book.PublishYear)
-	bookResponse := CreateBookResponse{}
+	bookResponse := domain.CreateBookResponse{}
 	result := a.db.Create(&newBook)
 
 	if result.Error != nil {

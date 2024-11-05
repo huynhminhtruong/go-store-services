@@ -10,6 +10,6 @@ type APIPort interface {
 
 type DBPort interface {
 	Get(id int64) (domain.Book, error)
-	Save(book *domain.Book) error
+	Save(book *domain.Book) *domain.CreateBookResponse
 	GetListBooks() ([]domain.Book, error)
 }
