@@ -32,6 +32,7 @@ gen-grpc-gateway:
 		--go_out ./src/services/ --go_opt paths=source_relative \
 		--go-grpc_out ./src/services/ --go-grpc_opt paths=source_relative \
 		--grpc-gateway_out=./src/services/ --grpc-gateway_opt paths=source_relative \
+		--grpc-gateway_opt generate_unbound_methods=true \
 
 # gRPC-Gateway generator to the protoc invocation example
 gen-grpc-gateway-example: sub-dir
