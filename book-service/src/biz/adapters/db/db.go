@@ -38,7 +38,7 @@ func NewAdapter(dataSourceURL string) (*Adapter, error) {
 func (a Adapter) Get(bookID int64) (domain.Book, error) {
 	var book domain.Book
 
-	err := a.db.First(&book, "book_id = ?", bookID).Error
+	err := a.db.First(&book, "id = ?", bookID).Error
 	if err != nil {
 		return domain.Book{}, err
 	}
