@@ -12,9 +12,9 @@ func (a Adapter) Create(ctx context.Context, request *book.CreateBookRequest) (*
 	// business domain supplies models
 	newBook := domain.NewBook(request.Title, request.Author, request.PublishYear)
 	// gRPC adapter is using APIPort interface to call business logic inside application
-	result, err := a.api.InsertBook(newBook)
-	if err != nil {
-		return nil, err
+	result := a.api.InsertBook(newBook)
+	if result.ErrorMessage != nil {
+		return nil, result.ErrorMessage
 	}
 	return &book.CreateBookResponse{BookId: result.BookID}, nil
 }
@@ -34,7 +34,7 @@ func (a Adapter) GetBook(ctx context.Context, request *book.GetBookRequest) (*bo
 	return bookRes, nil
 }
 
-// ListBooks
+// ListBooks get list of books
 func (a Adapter) ListBooks(ctx context.Context, request *book.ListBooksRequest) (*book.ListBooksResponse, error) {
 	books, err := a.api.ListBooks()
 	if err != nil {

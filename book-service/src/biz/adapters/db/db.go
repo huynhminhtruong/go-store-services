@@ -38,7 +38,7 @@ func NewAdapter(dataSourceURL string) (*Adapter, error) {
 func (a Adapter) Get(bookID int64) (domain.Book, error) {
 	var book domain.Book
 
-	err := a.db.First(&book, "book_id = ?", bookID).Error
+	err := a.db.First(&book, "id = ?", bookID).Error
 	if err != nil {
 		return domain.Book{}, err
 	}
@@ -46,7 +46,23 @@ func (a Adapter) Get(bookID int64) (domain.Book, error) {
 	return book, nil
 }
 
-func (a Adapter) Save(book *domain.Book) error { return nil }
+func (a Adapter) Save(book *domain.Book) *domain.CreateBookResponse {
+	newBook := domain.NewBook(book.Title, book.Author, book.PublishYear)
+	bookResponse := domain.CreateBookResponse{}
+	result := a.db.Create(&newBook)
+
+	if result.Error != nil {
+		bookResponse.BookID = -1
+		bookResponse.RowsAffected = 0
+		bookResponse.ErrorMessage = result.Error
+	} else {
+		bookResponse.BookID = newBook.ID
+		bookResponse.RowsAffected = result.RowsAffected
+		bookResponse.ErrorMessage = nil
+	}
+
+	return &bookResponse
+}
 
 func (a Adapter) GetListBooks() ([]domain.Book, error) {
 	var books []domain.Book

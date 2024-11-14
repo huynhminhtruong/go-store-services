@@ -34,6 +34,7 @@ service BookService {
     rpc Create(CreateBookRequest) returns (CreateBookResponse){
         option (google.api.http) = {
             post: "/v1/books"
+            body:"*"
         };
     }
     rpc ListBooks(ListBooksRequest) returns (ListBooksResponse) {
